@@ -21,6 +21,12 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'mssv',
+        'date_of_birth',
+        'classes',
+        'department',
+        'avatar',
+        'role'
     ];
 
     /**
