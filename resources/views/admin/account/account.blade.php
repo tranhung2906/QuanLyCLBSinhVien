@@ -60,11 +60,15 @@
                                             <i class="mdi mdi-dots-horizontal"></i>
                                         </button>
                                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton{{ $account->id }}">
-                                            <a class="dropdown-item" href="#">
+                                            <a class="dropdown-item" href="{{route('admin.account-edit', $account->id)}}">
                                                 <i class="mdi mdi-pencil"></i> Sửa
                                             </a>
-                                            <a class="dropdown-item" href="#" onclick="deleteAccount({{ $account->id }}, '{{ $account->name }}')">
-                                                <i class="mdi mdi-delete"></i> Xóa
+                                            <a class="dropdown-item"
+                                                href="#"
+                                                data-toggle="modal"
+                                                data-target="#deleteMemberModal"
+                                                data-id="{{ $account->id }}">
+                                                <i class="mdi mdi-account-key"></i> Cấp lại mật khẩu
                                             </a>
                                         </div>
                                     </div>
@@ -79,21 +83,39 @@
     </div>
 </div>
 
+<!-- Modal Xác nhận Xóa -->
+<div class="modal fade" id="deleteMemberModal" tabindex="-1" aria-labelledby="deleteMemberModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header bg-info text-white">
+                <h5 class="modal-title" id="deleteMemberModalLabel">Thông báo</h5>
+                <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Bạn có chắc chắn muốn cập lại mật khẩu không?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy</button>
+                <form id="deleteMemberForm" method="POST" action="{{route('admin.reset-password', $account->id)}}">
+                    @csrf
+                    <button type="submit" class="btn btn-info">Đồng ý</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
-    function editAccount(id) {
-        // Xử lý sửa tài khoản
-        console.log('Edit account ID:', id);
-        // Có thể redirect đến trang edit hoặc mở modal
-        // window.location.href = '/admin/accounts/' + id + '/edit';
-    }
-
-    function deleteAccount(id, name) {
-        if (confirm('Bạn có chắc chắn muốn xóa tài khoản "' + name + '"?')) {
-            // Xử lý xóa tài khoản
-            console.log('Delete account ID:', id);
-            // Có thể gửi request AJAX hoặc submit form
-            // fetch('/admin/accounts/' + id, { method: 'DELETE' })...
-        }
-    }
+    $(document).ready(function() {
+        $('.btn-delete').click(function() {
+            const name = $(this).data('name');
+            const url = $(this).data('url');
+            $('#deleteForm').attr('action', url);
+            $('#deleteModal').modal('show');
+        });
+    });
 </script>
 @endsection

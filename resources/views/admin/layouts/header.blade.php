@@ -85,7 +85,7 @@
                              width="33">
                      </a>
                      <div class="dropdown-menu dropdown-menu-right user-dd animated">
-                         <a class="dropdown-item" href="javascript:void(0)"><i class="ti-user m-r-5 m-l-5"></i> Trang cá nhân</a>
+                         <a class="dropdown-item" href="{{route('admin.profile')}}"><i class="ti-user m-r-5 m-l-5"></i> Trang cá nhân</a>
                          <a class="dropdown-item" href="javascript:void(0)"><i class="mdi mdi-settings m-r-5 m-l-5"></i> Cài đặt</a>
                          <a class="dropdown-item" href="javascript:void(0)" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                              <i class="mdi mdi-logout m-r-5 m-l-5"></i> Đăng xuất

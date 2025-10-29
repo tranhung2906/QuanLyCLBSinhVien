@@ -58,7 +58,7 @@
                                             <i class="mdi mdi-dots-horizontal"></i>
                                         </button>
                                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton{{ $club->id }}">
-                                            <a class="dropdown-item" href="">
+                                            <a class="dropdown-item" href="{{route('admin.club-edit', $club->id)}}">
                                                 <i class="mdi mdi-pencil"></i> Sửa
                                             </a>
                                         </div>

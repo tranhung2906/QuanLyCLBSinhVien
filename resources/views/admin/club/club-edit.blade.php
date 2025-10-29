@@ -26,19 +26,31 @@
         <div class="col-12">
             <div class="card card-body">
                 <h4 class="card-title">Chỉnh sửa câu lạc bộ</h4>
-                <form class="form-horizontal m-t-30" method="post" action="{{route('admin.member-update', $member->id)}}" enctype="multipart/form-data">
+                <form class="form-horizontal m-t-30" method="post" action="{{route('admin.club-update', $club->id)}}" enctype="multipart/form-data">
                     @csrf
                     <div class="form-group">
-                        <label>Họ và tên</label>
-                        <input type="text" class="form-control" name="name" value="{{$member->name}}">
+                        <label>Tên câu lạc bộ</label>
+                        <input type="text" class="form-control" name="name" value="{{$club->name}}">
                     </div>
                     <div class="form-group">
-                        <label>Ảnh đại diện</label>
-                        <input type="file" class="form-control" name="avatar">
-                        @if($member->avatar !== null)
+                        <label>Trạng thái</label>
+                        <select class="custom-select col-12" id="inlineFormCustomSelect" name="status">
+                            @if($club->status == 1)
+                            <option selected value="1">Hoạt động</option>
+                            <option value="0">Ngưng hoạt động</option>
+                            @else
+                            <option value="1">Hoạt động</option>
+                            <option selected value="0">Ngưng hoạt động</option>
+                            @endif
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Logo</label>
+                        <input type="file" class="form-control" name="logo">
+                        @if($club->avatar !== null)
                         <div class="form-group">
                             <label>Ảnh hiện tại</label>
-                            <img src="{{asset('storage/' . $member->avatar)}}" alt="" width="150px" style="margin-top: 30px;" />
+                            <img src="{{asset('storage/' . $club->logo)}}" alt="" width="150px" style="margin-top: 30px;" />
                         </div>
                         @endif
                     </div>
